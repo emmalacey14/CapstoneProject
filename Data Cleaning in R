@@ -1,1 +1,111 @@
+# First Set ----
+
+## Preparation ----
+
+# Load libraries ----
+library(dplyr)
+library(lubridate)
+library(tidyr)
+library(hms)
+library(tidyverse)
+library(janitor)
+
+# import multiple data frames into one list with original names
+
+# Correct folder path to the actual CSVs (not the parent folder of the folder)
+fitbit_path <- "Fitabase Data 3.12.16-4.11.16"  # Don't duplicate folder name
+
+# Read all CSVs
+fitbit_data <- list.files(path = fitbit_path, pattern = "*.csv", full.names = TRUE) %>%
+  set_names(~ basename(.) %>% tools::file_path_sans_ext()) %>%
+  map(read_csv)
+
+# Test: Does this show your CSV files?
+list.files("Fitabase Data 3.12.16-4.11.16", pattern = "*.csv")
+
+# 1. Clean names: remove "_merged" suffix and make lowercase
+names(fitbit_data) <- names(fitbit_data) %>%
+  sub("_merged$", "", .) %>%
+  tolower()
+
+# 2. Rename some datasets with consistent underscores
+rename_map <- c(
+  dailyactivity = "daily_activity",
+  minutesleep = "minute_sleep",
+  sleepday = "sleep_day",
+  weightloginfo = "weight_log_info",
+  minutecaloriesnarrow = "minute_calories_narrow",
+  minuteintensitiesnarrow = "minute_intensities_narrow",
+  minutemetsnarrow = "minute_mets_narrow",
+  minutestepsnarrow = "minute_steps_narrow",
+  hourlycalories = "hourly_calories",
+  hourlysteps = "hourly_steps",
+  hourlyintensities = "hourly_intensities"
+)
+
+new_names <- rename_map[names(fitbit_data)]
+
+# Replace NAs with original names using coalesce
+names(fitbit_data) <- coalesce(new_names, names(fitbit_data))
+
+# 3. Remove old or duplicate datasets safely
+old_names_to_remove <- c(
+  "dailycalories", "dailyintensities", "dailysteps", "dailyactivity",
+  "minutesleep", "sleepday", "weightloginfo","hourlycalories","hourlysteps"
+)
+fitbit_data <- fitbit_data[ !names(fitbit_data) %in% old_names_to_remove ]
+
+# 4. Helper function to merge multiple data frames by common keys ("id", "activityhour" or "datetime")
+safe_merge <- function(dfs, by_cols) {
+  # Filter out NULL or missing datasets
+  dfs <- keep(dfs, ~ !is.null(.x))
+  
+  
+  # Use reduce with inner_join
+  reduce(dfs, inner_join, by = by_cols)
+}
+
+names(fitbit_data)
+
+
+# 5. Merge hourly datasets
+hourly_activity <- fitbit_data$hourly_calories %>%
+  inner_join(fitbit_data$hourly_intensities, by = c("Id", "ActivityHour")) %>%
+  inner_join(fitbit_data$hourly_steps, by = c("Id", "ActivityHour"))
+
+
+
+# 6. Merge narrow minute datasets
+minute_narrow_dfs <- fitbit_data[c("minute_calories_narrow", "minute_intensities_narrow", "minute_mets_narrow", "minute_steps_narrow")]
+fitbit_data$minute_activity_narrow <- safe_merge(minute_narrow_dfs, by_cols = c("Id", "ActivityMinute"))
+
+# 7. Clean column names
+
+fitbit_data <- lapply(fitbit_data, janitor::clean_names)
+
+# 8. Remove duplicates
+
+hourly_activity <- hourly_activity %>% distinct()
+fitbit_data$minute_activity_narrow <- fitbit_data$minute_activity_narrow %>% distinct()
+fitbit_data <- lapply(fitbit_data, function(df) {
+  df[!duplicated(df), ]  # keep only unique rows
+})
+
+
+## ANALYSIS
+
+daily_activity <- read.csv("daily_activity")
+
+# Take a look at the daily_activity data.
+
+head("daily_activity")
+
+
+# Identify all the columns in the daily_activity data.
+
+colnames(dailyActivity_merged)
+
+n_distinct(dailyActivity_merged$Id)
+
+
 
