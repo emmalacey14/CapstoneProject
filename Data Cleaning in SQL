@@ -1,1 +1,162 @@
+1. Rename tables with consistent underscores (via views or aliases)
 
+-- Using views to rename tables for clarity and consistency
+
+CREATE OR REPLACE VIEW daily_activity AS
+SELECT * FROM dailyactivity;
+
+CREATE OR REPLACE VIEW minute_sleep AS
+SELECT * FROM minutesleep;
+
+CREATE OR REPLACE VIEW sleep_day AS
+SELECT * FROM sleepday;
+
+CREATE OR REPLACE VIEW weight_log_info AS
+SELECT * FROM weightloginfo;
+
+CREATE OR REPLACE VIEW minute_calories_narrow AS
+SELECT * FROM minutecaloriesnarrow;
+
+CREATE OR REPLACE VIEW minute_intensities_narrow AS
+SELECT * FROM minuteintensitiesnarrow;
+
+CREATE OR REPLACE VIEW minute_mets_narrow AS
+SELECT * FROM minutemetsnarrow;
+
+CREATE OR REPLACE VIEW minute_steps_narrow AS
+SELECT * FROM minutestepsnarrow;
+
+CREATE OR REPLACE VIEW hourly_calories AS
+SELECT * FROM hourlycalories;
+
+CREATE OR REPLACE VIEW hourly_intensities AS
+SELECT * FROM hourlyintensities;
+
+CREATE OR REPLACE VIEW hourly_steps AS
+SELECT * FROM hourlysteps;
+
+CREATE OR REPLACE VIEW minute_calories_wide AS
+SELECT * FROM minutecalorieswide;
+
+CREATE OR REPLACE VIEW minute_intensities_wide AS
+SELECT * FROM minuteintensitieswide;
+
+CREATE OR REPLACE VIEW minute_steps_wide AS
+SELECT * FROM minutestepswide;
+
+
+2. Drop/remove old datasets
+(In SQL you simply stop using the old tables; or drop if you want) (be cautious!)
+
+
+
+-- DROP TABLE dailycalories;
+-- DROP TABLE dailyintensities;
+-- DROP TABLE dailysteps;
+-- DROP TABLE dailyactivity;
+-- DROP TABLE minutesleep;
+-- DROP TABLE sleepday;
+-- DROP TABLE weightloginfo;
+
+3. Merge hourly datasets into one clean table
+
+CREATE OR REPLACE VIEW hourly_activity AS
+SELECT
+  hc.Id,
+  hc.ActivityHour,
+  hc.Calories AS HourlyCalories,
+  hi.IntensityLevel AS HourlyIntensity,
+  hs.Steps AS HourlySteps
+FROM
+  hourly_calories hc
+INNER JOIN hourly_intensities hi
+  ON hc.Id = hi.Id AND hc.ActivityHour = hi.ActivityHour
+INNER JOIN hourly_steps hs
+  ON hc.Id = hs.Id AND hc.ActivityHour = hs.ActivityHour;
+
+4. Merge narrow minute datasets into one clean table
+
+CREATE OR REPLACE VIEW minute_activity_narrow AS
+SELECT
+  c.Id,
+  c.ActivityMinute,
+  c.Calories AS MinuteCalories,
+  i.IntensityLevel AS MinuteIntensity,
+  m.METs AS MinuteMETs,
+  s.Steps AS MinuteSteps
+FROM
+  minute_calories_narrow c
+INNER JOIN minute_intensities_narrow i
+  ON c.Id = i.Id AND c.ActivityMinute = i.ActivityMinute
+INNER JOIN minute_mets_narrow m
+  ON c.Id = m.Id AND c.ActivityMinute = m.ActivityMinute
+INNER JOIN minute_steps_narrow s
+  ON c.Id = s.Id AND c.ActivityMinute = s.ActivityMinute;
+
+5. Merge wide minute datasets into one clean table
+
+CREATE OR REPLACE VIEW minute_activity_wide AS
+SELECT
+  c.Id,
+  c.ActivityMinute,
+  c.Calories AS MinuteCalories,
+  i.IntensityLevel AS MinuteIntensity,
+  s.Steps AS MinuteSteps
+FROM
+  minute_calories_wide c
+INNER JOIN minute_intensities_wide i
+  ON c.Id = i.Id AND c.ActivityMinute = i.ActivityMinute
+INNER JOIN minute_steps_wide s
+  ON c.Id = s.Id AND c.ActivityMinute = s.ActivityMinute;
+
+
+6. Merge sleep_activity and daily_activity by Id (full outer join)
+WITH merged_sleep_daily AS (
+  SELECT
+    COALESCE(s.Id, d.Id) AS Id,
+    s.*,
+    d.*
+  FROM sleep_activity s
+  FULL OUTER JOIN daily_activity d
+    ON s.Id = d.Id
+)
+
+6.1 Merge the above with weight_info by Id (full outer join)
+SELECT
+  COALESCE(msd.Id, w.Id) AS Id,
+  msd.*,
+  w.*
+FROM merged_sleep_daily msd
+FULL OUTER JOIN weight_info w
+  ON msd.Id = w.Id;
+
+7. Rename colmuns to snake_case
+
+Example: 
+
+CREATE OR REPLACE VIEW clean_hourly_activity AS
+SELECT 
+    Id AS user_id,
+    ActivityHour AS activity_hour,
+    Calories AS calories
+FROM hourlyactivity;
+
+
+8. Remove Duplicates in SQL
+Use SELECT DISTINCT to eliminate duplicate rows:
+
+Example:View without duplicates
+
+CREATE OR REPLACE VIEW unique_hourly_activity AS
+SELECT DISTINCT *
+FROM hourlyactivity;
+
+Example 2: Deduplicate a specific table (manually overwrite it)
+
+CREATE TABLE cleaned_hourly_activity AS
+SELECT DISTINCT *
+FROM hourlyactivity;
+
+Example 3: Deduplicate based on certain columns
+
+SELECT DISTINCT Id, ActivityHour FROM hourlyactivity;
