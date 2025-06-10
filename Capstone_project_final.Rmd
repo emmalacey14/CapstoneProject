@@ -2,8 +2,7 @@
 title: 'Case Study: BellaBeat Fitness Data Analysis'
 author: "Emma Lacey"
 date: "`r Sys.Date()`"
-output: github_document
-always_allow_html: true
+output: html_document
 ---
 
 ```{r setup, include=FALSE}
