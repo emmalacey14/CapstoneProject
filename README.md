@@ -5,29 +5,8 @@
 
 The case study follows the six-step data analysis process:
 
-<style>
-ul.icon-list {
-  list-style: none;
-  padding-left: 0;
-  margin-left: 0;
-}
 
-ul.icon-list li {
-  position: relative;
-  padding-left: 2.5em;  /* space for the icon */
-  margin-bottom: 0.5em;
-}
 
-ul.icon-list li::before {
-  content: attr(data-icon);
-  position: absolute;
-  left: 0;
-  top: 0;
-  font-size: 1.2em;
-  line-height: 1;
-  width: 2em;  /* fixed width for icon */
-}
-</style>
 <ul class="icon-list">
 <li data-icon="❓">
 
