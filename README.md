@@ -8,40 +8,12 @@
 
 The case study follows the six-step data analysis process:
 
-
-
-<ul class="icon-list">
-<li data-icon="❓">
-
-<strong>[Ask](#Ask) </strong>
-
-</li>
-<li data-icon="💻">
-
-<strong>[Prepare](#prepare)</strong>
-
-</li>
-<li data-icon="🛠">
-
-<strong>[Process](#process)</strong>
-
-</li>
-<li data-icon="📊">
-
-<strong>[Analyse](#analyse)</strong>
-
-</li>
-<li data-icon="📋">
-
-<strong>[Share](#share)</strong>
-
-</li>
-<li data-icon="🧗‍♀️">
-
-<strong>[Act](#act)</strong>
-
-</li>
-</ul>
+- ❓ **[Ask](#step-1-ask)**
+- 💻 **[Prepare](#step-2-prepare)**
+- 🛠 **[Process](#step-3-process)**
+- 📊 **[Analyse](#step-4-analyse)**
+- 📋 **[Share](#step-5-share)**
+- 🧗‍♀️ **[Act](#step-6-act)**
 
 ### Scenario
 
