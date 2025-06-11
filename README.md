@@ -555,17 +555,13 @@ and only 2.37% in very active minutes.
       type = 'pie',
       textposition = 'outside',
       textinfo = 'percent',
-      marker = list(colors = c("gold", "darkseagreen", "cornflowerblue", "lavender"))
+      marker = list(colors = c("gold", "darkseagreen", "cornflowerblue", "pink"))
     ) %>%
       layout(
         title = 'Percentage of Active Minutes by Activity Level',
         showlegend = TRUE
       )
-
-![newplot](https://github.com/user-attachments/assets/6a604d21-13e8-45be-ada7-bc2954d752f4)
-
-
-
+![plot_p](https://github.com/user-attachments/assets/6508ff1f-25b9-4249-a3b0-2f6e313445f3)
 
 <hr>
 
@@ -737,6 +733,12 @@ over 39 minutes awake before going to sleep.
     nrow(awake_39_any_day)
 
 <hr>
+
+### Step.5 Share
+
+<hr>
+
+https://public.tableau.com/views/Capstone_17496621051630/Dashboard1?:language=en-GB&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link
 
 ### Step 6. Act
 
