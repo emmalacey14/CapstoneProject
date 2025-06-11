@@ -1,3 +1,6 @@
+## Google Analytics Final Capstone
+### By Emma Lacey
+
 [My Google Analytics Certificate](#)  
 [My Tableau Dashboard](#)
 
@@ -544,7 +547,8 @@ about 7 hours of sleep each night.
       ) %>%
       summary()
 
-![](code_1.png)
+<img width="739" alt="code_1" src="https://github.com/user-attachments/assets/0754583f-671f-4aa6-a75d-2f75f8487c53" />
+
 
 <hr>
 
@@ -586,7 +590,10 @@ and only 2.37% in very active minutes.
         showlegend = TRUE
       )
 
-<img src="images/newplot.png" width="60%" style="display: block; margin: auto;" />
+![newplot](https://github.com/user-attachments/assets/6a604d21-13e8-45be-ada7-bc2954d752f4)
+
+
+
 
 <hr>
 
@@ -595,7 +602,12 @@ and only 2.37% in very active minutes.
 The bar graph shows that there is a jump on Saturday: user spent LESS
 time in sedentary minutes and are MORE active.
 
-<img src="images/total_active_week.png" width="49%" height="400px" /><img src="images/Graphs/sed_min_week.png" width="49%" height="400px" />
+
+<p float="left">
+  <img src="https://github.com/user-attachments/assets/a71fd6fe-d305-4cad-823f-dc39f8ba3a44" width="45%" />
+  <img src="https://github.com/user-attachments/assets/374c759c-b124-44c7-9d6f-42c511643f20" width="45%" />
+</p>
+
 
 This can be broken down further to show what active type they are
 engaging in.
@@ -614,7 +626,8 @@ engaging in.
     weekday_order <- c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
     active_breakdown_week$Weekday <- factor(active_breakdown_week$Weekday, levels = weekday_order)
 
-<img src="final.png" width="60%" style="display: block; margin: auto;" />
+![final](https://github.com/user-attachments/assets/c5bb7022-81b5-4b84-b22e-339fcd4f1c34)
+
 
 <hr>
 
@@ -632,7 +645,7 @@ to 7PM the users take the most steps.
            y = "Total Steps") +
       theme_minimal()
 
-<img src="images/Graphs/steps_hour.png" width="60%" style="display: block; margin: auto;" />
+![steps_hour](https://github.com/user-attachments/assets/7d4b6db8-4305-4e5b-8994-804ffa6876a1)
 
 Or our data can be presented in a line chart:
 
@@ -647,13 +660,13 @@ Or our data can be presented in a line chart:
            y = "Total Steps") +
       theme_minimal()
 
-<img src="images/Graphs/steps_line_2.png" width="60%" style="display: block; margin: auto;" />
+![steps_line_2](https://github.com/user-attachments/assets/1362340f-caf3-4579-98ec-f26deac8a4ab)
 
 Lets look at step count per day. Users take the most steps on Tuesdays,
 the amount of steps taken slowly decreases throughout the week and then
 spikes again on Saturdays.
 
-<img src="images/Graphs/steps_week.png" width="60%" style="display: block; margin: auto;" />
+![steps_week](https://github.com/user-attachments/assets/9bd2f900-68af-4635-84a6-9eedd4a05e51)
 
 We can also look at how many steps are been taken during each activity
 type.
@@ -670,7 +683,7 @@ type.
       theme_minimal() +
       scale_color_brewer(palette = "Accent")
 
-<img src="images/Graphs/step_active.png" width="60%" style="display: block; margin: auto;" />
+![step_active](https://github.com/user-attachments/assets/99edfe7c-4383-42c5-95e8-0a1cd109508b)
 
 This shows us that most steps are being taken during the ‘light’
 activity type.
@@ -681,7 +694,11 @@ activity type.
 
 Lets look at the relationship between activity vs calories.
 
-<img src="images/Graphs/cal_active.png" width="49%" /><img src="images/Graphs/cal_min.png" width="49%" />
+<p float="left">
+  <img src="https://github.com/user-attachments/assets/4fb22fd6-7a8d-44cd-9fea-57cf5ac84491" width="45%" />
+  <img src="https://github.com/user-attachments/assets/5e1c6518-c497-403f-9b09-65ab21458286" width="45%" />
+</p>
+
 
 On average, those in a ‘fairly active’ or ‘very active’ phase burn more
 calories per minute than those in ‘lightly active’ or ‘sedentary’ phase.
@@ -702,7 +719,7 @@ increased sleep mean burning less calories?
       ) +
       theme_minimal()
 
-<img src="images/Graphs/sleep_cal.png" width="60%" style="display: block; margin: auto;" />
+![sleep_cal](https://github.com/user-attachments/assets/fb7e7a7a-44dd-4feb-9600-2c6ffd6683a6)
 
 The chart doesn’t show us much, so lets check with a correlation test:
 
