@@ -2,7 +2,7 @@
 ### By Emma Lacey
 
 [My Google Analytics Certificate](#)  
-[My Tableau Dashboard](#)
+[My Tableau Dashboard](https://public.tableau.com/app/profile/emma.lacey/vizzes)
 
 ### Data Analysis Process
 
