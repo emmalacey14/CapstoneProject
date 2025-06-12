@@ -1,7 +1,8 @@
 ## Google Analytics Final Capstone
 ### By Emma Lacey
 
-[My Google Analytics Certificate](#)  
+[My Google Analytics Certificate](https://github.com/user-attachments/files/20706029/GA.Certificate.pdf)
+
 [My Tableau Dashboard](https://public.tableau.com/app/profile/emma.lacey/vizzes)
 
 ### Data Analysis Process
