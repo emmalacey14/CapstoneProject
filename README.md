@@ -13,7 +13,7 @@ The case study follows the six-step data analysis process:
  🛠 **[Process](#step-3-process)**
  📊 **[Analyse](#step-4-analyse)**
  📋 **[Share](#step-5-share)**
- 🧗‍♀️ **[Act](#step-6-act)**
+  🧗‍♀️ **[Act](#step-6-act)**
 
 ### Scenario
 
@@ -734,7 +734,7 @@ over 39 minutes awake before going to sleep.
 
 <hr>
 
-### Step.5 Share
+### Step 5. Share
 
 <hr>
 
@@ -744,6 +744,7 @@ Click the image below to view my Tableau Profile (Power BI version tbc)
 ](https://public.tableau.com/views/Capstone_17496621051630/Dashboard1?:language=en-GB&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)
 
 <hr>
+
 ### Step 6. Act
 
 <hr>
