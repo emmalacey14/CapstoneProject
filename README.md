@@ -738,8 +738,12 @@ over 39 minutes awake before going to sleep.
 
 <hr>
 
-https://public.tableau.com/views/Capstone_17496621051630/Dashboard1?:language=en-GB&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link
+Click the image below to view my Tableau Profile (Power BI version tbc)
 
+[<img width="260" alt="Tab" src="https://github.com/user-attachments/assets/0802a936-e6c7-41b0-8654-e1aac726f574" />
+](https://public.tableau.com/views/Capstone_17496621051630/Dashboard1?:language=en-GB&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)
+
+<hr>
 ### Step 6. Act
 
 <hr>
